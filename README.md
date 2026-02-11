@@ -1,15 +1,20 @@
 # DHCP-STARVATION
 
+## Video (máx. 8 minutos)
+[![Ver video en YouTube](https://img.youtube.com/vi/pKLjDihj_vw/0.jpg)](https://youtu.be/pKLjDihj_vw)
+
 # Informe Técnico: Denegación de Servicio mediante DHCP Starvation
 
 ## I-) Introducción y Objetivos del Script.
 En el presente documento veremos el script con el objetivo principal de causar una denegación de servicio (DoS) en el servidor DHCP de la red local, este script se ejecuta para agotar totalmente el espacio de direcciones disponibles (Address Pool). La herramienta emplea la biblioteca Scapy para llevar a cabo una inundación masiva de paquetes DHCP DISCOVER, los cuales se generan con direcciones MAC de origen único y aleatorias. El servidor (el router R1 en la topología) asigna una dirección IP a cada cliente ficticio, asumiendo que son dispositivos reales, al recibir estas solicitudes. Cuando el conjunto de direcciones alcanza su límite, el servidor legítimo no puede contestar a las demandas de los dispositivos auténticos y los usuarios nuevos quedan sin conexión a la red.
+
 <img width="456" height="436" alt="image" src="https://github.com/user-attachments/assets/b85621cf-5130-44e5-8808-26ae3c1f1d53" />
 
 ---
 
 ## II-) Topología y Escenario de Laboratorio
 Se ha implementado el entorno de pruebas en PNETLab, con una infraestructura que emula una topologia del ITLA. El núcleo de la red consiste en un router R1 que tiene la dirección IP 10.24.9.1 y sirve como servidor DHCP primario, conectado a una serie de switches Cisco (Switch 1 y Switch 2). La dirección IP 10.24.9.18 es usada por la máquina atacante (Kali Linux), que está conectada al puerto Gi0/1 del Switch 1.
+
 <img width="829" height="879" alt="Screenshot 2026-02-10 213221" src="https://github.com/user-attachments/assets/691996a8-b036-4a84-8bc4-8a58d23557e0" />
 
 
@@ -45,5 +50,3 @@ Para evitar este tipo de ataques en los entornos de producción, es esencial que
 
 ---
 
-## Video (máx. 8 minutos)
-[![Ver video en YouTube](https://img.youtube.com/vi/pKLjDihj_vw/0.jpg)](https://youtu.be/pKLjDihj_vw)
