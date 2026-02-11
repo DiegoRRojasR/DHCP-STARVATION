@@ -19,6 +19,7 @@ Se ha implementado el entorno de pruebas en PNETLab, con una infraestructura que
 
 
 El propósito final es dejar aislada a la víctima, conocida como "POBRE ALMA EN PENA", que al intentar actualizar su IP se topa con un servidor colapsado y sin capacidad para responder.
+
 <img width="463" height="460" alt="Screenshot 2026-02-10 213413" src="https://github.com/user-attachments/assets/8f38f0e4-a007-48a8-b5a6-01759b18b627" />
 
 ---
@@ -29,18 +30,22 @@ El script solicita una interfaz de red activa en modo promiscuo y privilegios de
 - **Interfaz (-i):** Especifica la tarjeta de red (ej. eth0) conectada al segmento objetivo.  
 - **Número de paquetes (-n):** Define la cantidad de solicitudes; el valor por defecto es 300, diseñado para desbordar una subred estándar /24 (254 IPs).  
 - **Modo Persistente (-p):** Es una función crítica que mantiene el ataque en bucle infinito, re-enviando solicitudes periódicamente para evitar que las concesiones (leases) del servidor expiren y las IPs vuelvan a estar libres.
+
 <img width="319" height="22" alt="Screenshot 2026-02-10 213923" src="https://github.com/user-attachments/assets/ce47a343-934f-40ba-b389-7fad3307d78b" />
 
 ---
 
 ## IV-) Análisis de Resultados y Evidencia
 Se comprueba la eficacia del ataque al examinar los registros en la terminal de Kali, que muestran ráfagas de paquetes que se enviaron con éxito.
+
 <img width="319" height="418" alt="Screenshot 2026-02-10 214239" src="https://github.com/user-attachments/assets/17a81a6b-15e3-4440-b7fd-c668413e7525" />
 
 En la consola del switch, el puerto de la víctima queda en una condición de espera indefinida y, al lanzar el comando `ipconfig /renew` en un equipo con Windows, se genera el error: **"No se puede contactar con su servidor DHCP". "Se ha agotado el tiempo de la solicitud".**
+
 <img width="694" height="214" alt="Screenshot 2026-02-10 214451" src="https://github.com/user-attachments/assets/a54800ed-de68-4a75-99cf-af04d2ea7b57" />
 
 Esto evidencia que el router R1 ya no está procesando solicitudes. Asimismo, utilizando comandos de validación en el router, como `show ip dhcp binding`, es posible verificar que la tabla está colmada de entradas relacionadas con las direcciones MAC aleatorias producidas por el script.
+
 <img width="816" height="677" alt="Screenshot 2026-02-10 214754" src="https://github.com/user-attachments/assets/8b543801-5e0b-4684-a90e-757e4b6b037c" />
 
 ---
